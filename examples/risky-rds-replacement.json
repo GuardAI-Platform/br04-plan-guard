@@ -1,0 +1,45 @@
+{
+  "_synthetic": "SYNTHETIC EXAMPLE. Hand written for this repository. Not produced by a real terraform plan and not from any real account.",
+  "_scenario": "An identifier change on an RDS instance. Terraform reports this as a replacement: the existing database is destroyed and a new empty one is created.",
+  "format_version": "1.2",
+  "terraform_version": "1.9.5",
+  "resource_changes": [
+    {
+      "address": "aws_db_instance.orders",
+      "mode": "managed",
+      "type": "aws_db_instance",
+      "name": "orders",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["delete", "create"],
+        "before": {
+          "identifier": "orders-prod",
+          "engine": "postgres",
+          "allocated_storage": 200
+        },
+        "after": {
+          "identifier": "orders-production",
+          "engine": "postgres",
+          "allocated_storage": 200,
+          "tags": {
+            "Name": "orders-production",
+            "Environment": "production"
+          }
+        },
+        "replace_paths": [["identifier"]]
+      }
+    },
+    {
+      "address": "aws_db_parameter_group.orders",
+      "mode": "managed",
+      "type": "aws_db_parameter_group",
+      "name": "orders",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": { "name": "orders-pg16" },
+        "after": { "name": "orders-pg16" }
+      }
+    }
+  ]
+}

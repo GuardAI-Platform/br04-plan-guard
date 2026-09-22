@@ -1,0 +1,68 @@
+{
+  "_synthetic": "SYNTHETIC EXAMPLE. Hand written for this repository. Not produced by a real terraform plan and not from any real account.",
+  "format_version": "1.2",
+  "terraform_version": "1.9.5",
+  "resource_changes": [
+    {
+      "address": "aws_db_instance.orders",
+      "mode": "managed",
+      "type": "aws_db_instance",
+      "name": "orders",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {
+          "identifier": "orders-prod",
+          "backup_retention_period": 7,
+          "instance_class": "db.r6g.large"
+        },
+        "after": {
+          "identifier": "orders-prod",
+          "backup_retention_period": 14,
+          "instance_class": "db.r6g.large",
+          "tags": {
+            "Name": "orders-prod",
+            "Environment": "production"
+          }
+        }
+      }
+    },
+    {
+      "address": "aws_s3_bucket.audit_logs",
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "audit_logs",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["no-op"],
+        "before": { "bucket": "example-audit-logs" },
+        "after": { "bucket": "example-audit-logs" }
+      }
+    },
+    {
+      "address": "aws_security_group_rule.api_ingress",
+      "mode": "managed",
+      "type": "aws_security_group_rule",
+      "name": "api_ingress",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": { "from_port": 443, "to_port": 443, "protocol": "tcp" }
+      }
+    },
+    {
+      "address": "aws_instance.api[0]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "api",
+      "index": 0,
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["delete", "create"],
+        "before": { "instance_type": "t3.medium" },
+        "after": { "instance_type": "t3.large" }
+      }
+    }
+  ]
+}

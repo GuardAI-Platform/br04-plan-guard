@@ -1,0 +1,28 @@
+{
+  "_synthetic": "SYNTHETIC EXAMPLE. Hand written for this repository. Deliberately malformed to prove the control fails closed.",
+  "_scenario": "Valid JSON, but not a usable plan: resource_changes[1] has no change.actions. The control cannot decide, so it refuses to pass.",
+  "format_version": "1.2",
+  "terraform_version": "1.9.5",
+  "resource_changes": [
+    {
+      "address": "aws_db_instance.orders",
+      "mode": "managed",
+      "type": "aws_db_instance",
+      "name": "orders",
+      "change": {
+        "actions": ["update"],
+        "before": {},
+        "after": {}
+      }
+    },
+    {
+      "address": "aws_s3_bucket.audit_logs",
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "audit_logs",
+      "change": {
+        "before": {}
+      }
+    }
+  ]
+}

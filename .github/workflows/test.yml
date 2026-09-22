@@ -1,0 +1,53 @@
+name: BR-04
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  OPA_VERSION: "1.20.2"
+
+jobs:
+  verify:
+    name: verify (fmt, shellcheck, rego tests, adversarial exit codes)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install OPA ${{ env.OPA_VERSION }}
+        run: |
+          curl -sSL -o /usr/local/bin/opa \
+            "https://openpolicyagent.org/downloads/v${OPA_VERSION}/opa_linux_amd64_static"
+          chmod +x /usr/local/bin/opa
+          opa version
+
+      - name: make verify
+        run: make verify
+
+  guardrail:
+    name: guardrail on a plan (this is the job that blocks a pull request)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install OPA ${{ env.OPA_VERSION }}
+        run: |
+          curl -sSL -o /usr/local/bin/opa \
+            "https://openpolicyagent.org/downloads/v${OPA_VERSION}/opa_linux_amd64_static"
+          chmod +x /usr/local/bin/opa
+
+      # In your own repository this step is:
+      #   terraform plan -out=tfplan
+      #   terraform show -json tfplan > tfplan.json
+      # Here it is a synthetic plan committed to the repository, so the job needs
+      # no cloud credentials and no state backend.
+      - name: Select plan
+        run: cp examples/safe-plan.json tfplan.json
+
+      - name: BR-04 check
+        run: scripts/check-plan.sh tfplan.json

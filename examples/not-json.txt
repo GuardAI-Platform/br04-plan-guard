@@ -1,0 +1,6 @@
+SYNTHETIC EXAMPLE. Not JSON at all.
+
+Used to prove that check-plan.sh rejects an unparseable file before OPA is invoked,
+with exit code 2, rather than treating it as an empty plan and passing.
+
+{ "resource_changes": [ this is not valid JSON

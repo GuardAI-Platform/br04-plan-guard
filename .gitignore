@@ -1,0 +1,9 @@
+# Locally installed OPA
+bin/
+
+# Plan files. These can contain sensitive values. Never commit them.
+tfplan
+tfplan.json
+*.tfplan
+*.tfplan.json
+plan.json
