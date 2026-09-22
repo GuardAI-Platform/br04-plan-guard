@@ -45,7 +45,7 @@ Needs `opa`, `jq`, `make`, `bash`. No AWS account, no credentials, no Terraform,
 cloud calls. Two minutes from clone.
 
 ```bash
-git clone https://github.com/<your-org>/br04-plan-guard.git
+git clone https://github.com/GuardAI-Platform/br04-plan-guard.git
 cd br04-plan-guard
 
 make install-opa          # optional, if opa is not already on PATH (installs to ./bin)
