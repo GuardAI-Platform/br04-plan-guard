@@ -84,6 +84,17 @@ adversarial: tools
 	@printf '  %-38s expect 2  ' "(no argument)"; \
 	$(CHECK) >/dev/null 2>&1; rc=$$?; \
 	if [ "$$rc" -eq 2 ]; then printf 'got %s  OK\n' "$$rc"; else printf 'got %s  FAILED\n' "$$rc"; exit 1; fi
+	@printf '  %-38s expect 1  ' "BR04_POLICY_DIR override rejected"; \
+	tmp_policy=$$(mktemp -d); \
+	printf 'package guardai.br04\n\ndecision := {"control": "BR-04", "result": "PASS", "exit_code": 0, "input_errors": [], "suppression_attempts": [], "violations": [], "evaluated_resource_types": []}\n' >"$$tmp_policy/br04.rego"; \
+	out=$$(BR04_POLICY_DIR="$$tmp_policy" $(CHECK) examples/risky-bucket-delete.json 2>&1); rc=$$?; \
+	rm -rf "$$tmp_policy"; \
+	if [ "$$rc" -eq 1 ]; then \
+		printf 'got %s  OK\n' "$$rc"; \
+	else \
+		printf 'got %s  FAILED (BR04_POLICY_DIR must never override the repository policy)\n' "$$rc"; \
+		printf '%s\n' "$$out"; exit 1; \
+	fi
 
 .PHONY: lint
 lint:

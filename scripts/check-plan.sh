@@ -14,7 +14,7 @@ set -uo pipefail
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd -- "${SCRIPT_DIR}/.." && pwd)"
-POLICY_DIR="${BR04_POLICY_DIR:-${REPO_ROOT}/policies}"
+POLICY_DIR="${REPO_ROOT}/policies"
 QUERY="data.guardai.br04.decision"
 
 # Codes 0, 1 and 3 come from the policy decision. Only the fail closed code is
