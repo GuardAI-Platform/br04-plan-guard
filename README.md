@@ -1,16 +1,20 @@
-# BR-04: can your AI written Terraform delete production?
+# BR-04: What happens when AI-generated infrastructure reaches production?
 
-A working example of one control, end to end. Companion repository to the GuardAIOps
-guide *Can Your AI-Written Terraform Delete Production?*
+AI helps teams build infrastructure faster. Guard AI helps review what reaches production.
 
-It answers one question about a Terraform plan, deterministically, before apply:
+This repository is a working demo of that review: one control, end to end. It is the
+companion to the GuardAIOps guide *What Happens When AI-Generated Infrastructure Reaches
+Production?*
+
+It shows how Guard AI reviews production infrastructure risk before deployment, by
+answering one question about a Terraform plan, deterministically, before apply:
 
 > Does this plan destroy or replace a database, a bucket, or another stateful resource
 > that holds the only copy of something?
 
 That is **BR-04**. One control, implemented honestly, with its limits written down.
 
-This is an educational repository. It is not the Guard AI platform, and nothing here
+This is a demo of a single control. It is not the Guard AI platform, and nothing here
 claims to be a compliance product.
 
 ---
@@ -248,4 +252,4 @@ MIT. See [`LICENSE`](LICENSE).
 ---
 
 Built by IronRim as a companion to the GuardAIOps guide
-*Can Your AI-Written Terraform Delete Production?*
+*What Happens When AI-Generated Infrastructure Reaches Production?*
